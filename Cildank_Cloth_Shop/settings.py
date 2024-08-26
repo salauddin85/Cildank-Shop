@@ -38,8 +38,8 @@ DEBUG = True
 CORS_ALLOW_ALL_ORIGINS = True
 ALLOWED_HOSTS = ['*']
 LOGIN_URL="http://127.0.0.1:5500/login.html"
-ALLOWED_HOSTS = ['https://cildank-cloth-shop.onrender.com', 'localhost']
-CSRF_TRUSTED_ORIGINS = ['https://cildank-cloth-shop.onrender.com']
+ALLOWED_HOSTS = ['https://cildank-shop.onrender.com', 'localhost']
+CSRF_TRUSTED_ORIGINS = ['https://cildank-shop.onrender.com']
 
 
 # Application definition
