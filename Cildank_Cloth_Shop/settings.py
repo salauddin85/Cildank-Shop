@@ -37,8 +37,8 @@ DEBUG = True
 CORS_ALLOW_ALL_ORIGINS = True
 ALLOWED_HOSTS = ['*']
 LOGIN_URL="http://127.0.0.1:5500/login.html"
-# ALLOWED_HOSTS = ['https://cloth-store-mym7.onrender.com', 'localhost']
-# CSRF_TRUSTED_ORIGINS = ['https://cloth-store-mym7.onrender.com']
+ALLOWED_HOSTS = ['https://cildank-cloth-shop.onrender.com', 'localhost']
+CSRF_TRUSTED_ORIGINS = ['https://cildank-cloth-shop.onrender.com']
 
 
 # Application definition
@@ -104,24 +104,24 @@ WSGI_APPLICATION = 'Cildank_Cloth_Shop.wsgi.application'
 # }
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env("DB_HOST"),
-        'PORT': env("DB_PORT"),
-    }
-}
-
 # DATABASES = {
-#     'default': dj_database_url.config(
-#         # Replace this value with your local database's connection string.
-#         default='postgresql://fashionfusion_shop_mn7y_user:7PH0VXVFFJKj2uWIPnEvko4QxDwApkho@dpg-cqqvi6o8fa8c73flvm9g-a.oregon-postgres.render.com/fashionfusion_shop_mn7y',
-        
-#     )
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env("DB_NAME"),
+#         'USER': env("DB_USER"),
+#         'PASSWORD': env("DB_PASSWORD"),
+#         'HOST': env("DB_HOST"),
+#         'PORT': env("DB_PORT"),
+#     }
 # }
+
+DATABASES = {
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://cildank_shop_user:q0ylVYIQZVKhoABeUfJcQXGW2sZkiJz9@dpg-cr66mortq21c73ba9ifg-a.oregon-postgres.render.com/cildank_shop',
+        
+    )
+}
 
 
 # Password validation
