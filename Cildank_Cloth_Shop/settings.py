@@ -37,7 +37,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True  # ডেভেলপমেন্টের জন্য
 CORS_ALLOW_ALL_ORIGINS = True  # শুধুমাত্র ডেভেলপমেন্টে ব্যবহারের জন্য
 ALLOWED_HOSTS = ['cildank-shop.onrender.com', 'localhost']
-LOGIN_URL = "http://127.0.0.1:5500/login.html"  # প্রয়োজন অনুযায়ী
+LOGIN_URL = "https://cildank-shop.onrender.com/login.html"  # প্রয়োজন অনুযায়ী
 CSRF_TRUSTED_ORIGINS = ['https://cildank-shop.onrender.com']
 
 
