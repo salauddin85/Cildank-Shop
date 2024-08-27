@@ -202,7 +202,6 @@ import os
 
 import cloudinary.uploader
 import cloudinary.api
-CLOUDINARY_URL='cloudinary://464615231665312:CGMQbVMG6UJOS7zSsY9AlOlX6S0@dnzqmx8nw?secure_distribution=mydomain.com&upload_prefix=myprefix.com'
 CLOUDINARY_URL='cloudinary://464615231665312:CGMQbVMG6UJOS7zSsY9AlOlX6S0@dnzqmx8nw'
 cloudinary.config(
     cloud_name="dnzqmx8nw",
@@ -216,5 +215,5 @@ cloudinary.config(
 #     'API_SECRET': 'CGMQbVMG6UJOS7zSsY9AlOlX6S0',
 # }
 
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
