@@ -24,17 +24,6 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 import cloudinary
-import cloudinary.uploader
-import cloudinary.api
-
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dnzqmx8nw',
-    'API_KEY': '464615231665312',
-    'API_SECRET': 'CGMQbVMG6UJOS7zSsY9AlOlX6S0',
-}
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
 
 
 
@@ -205,3 +194,27 @@ REST_FRAMEWORK = {
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import os
+
+# Set the CLOUDINARY_URL using the provided value
+# CLOUDINARY_URL = os.env('CLOUDINARY_URL', 'cloudinary://464615231665312:CGMQbVMG6UJOS7zSsY9AlOlX6S0@dnzqmx8nw?secure_distribution=mydomain.com&upload_prefix=myprefix.com')
+
+import cloudinary.uploader
+import cloudinary.api
+CLOUDINARY_URL='cloudinary://464615231665312:CGMQbVMG6UJOS7zSsY9AlOlX6S0@dnzqmx8nw?secure_distribution=mydomain.com&upload_prefix=myprefix.com'
+CLOUDINARY_URL='cloudinary://464615231665312:CGMQbVMG6UJOS7zSsY9AlOlX6S0@dnzqmx8nw'
+cloudinary.config(
+    cloud_name="dnzqmx8nw",
+    api_key="464615231665312",
+    api_secret="CGMQbVMG6UJOS7zSsY9AlOlX6S0"
+)
+
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'dnzqmx8nw',
+#     'API_KEY': '464615231665312',
+#     'API_SECRET': 'CGMQbVMG6UJOS7zSsY9AlOlX6S0',
+# }
+
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
