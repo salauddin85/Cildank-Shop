@@ -26,3 +26,6 @@ tzdata
 wheel
 gunicorn
 django-cors-headers
+cloudinary
+django-cloudinary-storage
+requests
