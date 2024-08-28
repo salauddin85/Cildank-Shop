@@ -286,6 +286,7 @@ class ReviewViewset(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    lookup_field = 'id'
 
     def perform_create(self, serializer, **kwargs):
         # Save the instance with additional fields
