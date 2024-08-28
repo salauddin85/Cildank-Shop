@@ -146,7 +146,8 @@ class PurchaseCartView(APIView):
             return Response({'error': "Invalid price format"}, status=status.HTTP_400_BAD_REQUEST)
 
         # Ensure the request contains product_ids
-        product_ids = request.data.get('product_ids')
+        product_ids = request.data.get('product_ids', [])
+        products = Product.objects.filter(id__in=product_ids)
         if not product_ids:
             return Response({'error': "No products specified"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -165,9 +166,12 @@ class PurchaseCartView(APIView):
             email.send()
 
             # Create purchase record
-            PurchaseCartModel.objects.create(
+            
+            purchase = PurchaseModel.objects.create(
                 user=request.user,
             )
+            purchase.product.set(products)
+            purchase.save()
 
             return Response({'success': "Purchase completed successfully"}, status=status.HTTP_200_OK)
         else:

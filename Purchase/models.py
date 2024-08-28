@@ -21,10 +21,10 @@ class PurchaseModel(models.Model):
    
 
 
-class PurchaseCartModel(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
-    product = models.ForeignKey(Product,on_delete=models.CASCADE,null=True,blank=True)
+# class PurchaseCartModel(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
+#     product = models.ForeignKey(Product,on_delete=models.CASCADE,null=True,blank=True)
     
-    def __str__(self) -> str:
-        return f'{self.user.first_name} {self.user.last_name} product id: {self.product.pk}'
+#     def __str__(self) -> str:
+#         return f'{self.user.first_name} {self.user.last_name} product id: {self.product.pk}'
     
