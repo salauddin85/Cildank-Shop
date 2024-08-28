@@ -148,7 +148,9 @@ class PurchaseCartView(APIView):
 
         # Ensure the request contains product_ids
         product_ids = request.data.get('product_ids', [])
+        print(product_ids)
         products = Product.objects.filter(id__in=product_ids)
+        print(products)
         if not product_ids:
             return Response({'error': "No products specified"}, status=status.HTTP_400_BAD_REQUEST)
 
