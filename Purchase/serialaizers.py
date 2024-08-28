@@ -11,10 +11,19 @@ class PurchaseSerializer(serializers.ModelSerializer):
         fields = ['']
         # fields = ['product']
    
+# class PurchaseCartSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = PurchaseCartModel
+#         fields = ['']
+
+
 class PurchaseCartSerializer(serializers.ModelSerializer):
     class Meta:
         model = PurchaseCartModel
-        fields = ['']
+        fields = ['']  # Serialize the user and products
+
+
+
 
 class PurchaseProductSerialaizer(serializers.ModelSerializer):
     product = ProductSerializer( read_only=True)

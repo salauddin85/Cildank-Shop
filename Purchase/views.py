@@ -72,29 +72,88 @@ class PurchaseProductView(APIView):
 
 
 
+# class PurchaseCartView(APIView):
+#     permission_classes = [IsAuthenticated]
+
+#     def post(self, request,price):
+        
+#         try:
+#             requested_user = Account.objects.get(user=request.user)
+#         except Account.DoesNotExist:
+#             return Response({'error': "No Account Match"}, status=status.HTTP_400_BAD_REQUEST)
+
+       
+#         print(f"Requested User: {requested_user}")
+       
+
+#         # Check if user is authenticated
+#         if not request.user.is_authenticated:
+#             raise PermissionDenied("User is not authenticated")
+#         price = Decimal(price)
+
+#         if requested_user.balance >= price:
+#             requested_user.balance-=price
+#             requested_user.save()
+            
+
+#             # Email Part
+#             email_subject = "Purchase Confirmation"
+#             email_body = render_to_string("cartpurchase_email.html", {
+#                 'user': request.user,
+#                 'balance': requested_user.balance
+#             })
+#             email = EmailMultiAlternatives(email_subject, '', to=[request.user.email])
+#             email.attach_alternative(email_body, 'text/html')
+#             email.send()
+
+#             # Create purchase record
+#             PurchaseCartModel.objects.create(
+#                 user=request.user,
+                
+
+#             )
+#             return Response({'success': "Purchase completed successfully"}, status=status.HTTP_200_OK)
+#         else:
+#             return Response({'error': "Insufficient balance or product quantity"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class PurchaseProductallView(viewsets.ModelViewSet):
+    queryset = PurchaseModel.objects.all()
+    serializer_class =PurchaseProductSerialaizer
+
+
+
+
+
+
+
+
 class PurchaseCartView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def post(self, request,price):
-        
+    def post(self, request, price):
         try:
             requested_user = Account.objects.get(user=request.user)
         except Account.DoesNotExist:
             return Response({'error': "No Account Match"}, status=status.HTTP_400_BAD_REQUEST)
 
-       
-        print(f"Requested User: {requested_user}")
-       
-
-        # Check if user is authenticated
-        if not request.user.is_authenticated:
-            raise PermissionDenied("User is not authenticated")
         price = Decimal(price)
 
         if requested_user.balance >= price:
-            requested_user.balance-=price
+            requested_user.balance -= price
             requested_user.save()
-            
+
+            # Capture the product IDs from the request
+            product_ids = request.data.get('product_ids', [])
+            products = Product.objects.filter(id__in=product_ids)
+
+            # Create purchase record
+            purchase = PurchaseCartModel.objects.create(
+                user=request.user,
+            )
+            purchase.products.set(products)
+            purchase.save()
 
             # Email Part
             email_subject = "Purchase Confirmation"
@@ -106,20 +165,6 @@ class PurchaseCartView(APIView):
             email.attach_alternative(email_body, 'text/html')
             email.send()
 
-            # Create purchase record
-            PurchaseCartModel.objects.create(
-                user=request.user,
-                
-
-            )
             return Response({'success': "Purchase completed successfully"}, status=status.HTTP_200_OK)
         else:
             return Response({'error': "Insufficient balance or product quantity"}, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-
-
-class PurchaseProductallView(viewsets.ModelViewSet):
-    queryset = PurchaseModel.objects.all()
-    serializer_class =PurchaseProductSerialaizer
