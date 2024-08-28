@@ -21,5 +21,6 @@ urlpatterns = [
     path('wishlist/add_product/<int:product_id>/', WishlistViewset.as_view({'post': 'add_product'}), name='add-product-to-wishlist'),
     path('wishlist/remove_product/<int:product_id>/', WishlistViewset.as_view({'post': 'remove_product'}), name='remove-product-from-wish'),
     path('add_review/<int:id>',ReviewViewset.as_view({'post':'add_review'}),name="add_review"),
+    path('reviews_by_product/<int:product_id>',ReviewViewset.as_view({'get':'reviews_by_product'}),name="reviwes_by_product"),
     path('search_product/<str:search>/',ProductViewset.as_view({'get':'sorted_by_search'}),name="sorted_by_search"),
 ]

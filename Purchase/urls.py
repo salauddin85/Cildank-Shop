@@ -9,6 +9,6 @@ router.register('purchase_all',PurchaseProductallView, basename='purchase')
 urlpatterns = [
     path('', include(router.urls)),
     path("list/<int:id>",PurchaseProductView.as_view(),name='purchase'),
-    path("payment_cart/<str:price>",PurchaseCartView.as_view(),name='purchase'),
+    path("payment_cart/<str:price>/",PurchaseCartView.as_view(),name='purchase'),
 
 ] 
