@@ -127,7 +127,6 @@ class PurchaseProductallView(viewsets.ModelViewSet):
 
 from decimal import InvalidOperation
 
-
 class PurchaseCartView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -137,7 +136,6 @@ class PurchaseCartView(APIView):
         except Account.DoesNotExist:
             return Response({'error': "No Account Match"}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Check if user is authenticated
         if not request.user.is_authenticated:
             return Response({'error': "User is not authenticated"}, status=status.HTTP_403_FORBIDDEN)
 
@@ -146,19 +144,18 @@ class PurchaseCartView(APIView):
         except InvalidOperation:
             return Response({'error': "Invalid price format"}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Ensure the request contains product_ids
         product_ids = request.data.get('product_ids', [])
-        print(product_ids)
-        products = Product.objects.filter(id__in=product_ids)
-        print(products)
         if not product_ids:
             return Response({'error': "No products specified"}, status=status.HTTP_400_BAD_REQUEST)
+
+        products = Product.objects.filter(id__in=product_ids)
+        if not products:
+            return Response({'error': "Products not found"}, status=status.HTTP_400_BAD_REQUEST)
 
         if requested_user.balance >= price:
             requested_user.balance -= price
             requested_user.save()
 
-            # Email Part
             email_subject = "Purchase Confirmation"
             email_body = render_to_string("cartpurchase_email.html", {
                 'user': request.user,
@@ -168,8 +165,6 @@ class PurchaseCartView(APIView):
             email.attach_alternative(email_body, 'text/html')
             email.send()
 
-            # Create purchase record
-            
             purchase = PurchaseModel.objects.create(
                 user=request.user,
             )
@@ -179,4 +174,3 @@ class PurchaseCartView(APIView):
             return Response({'success': "Purchase completed successfully"}, status=status.HTTP_200_OK)
         else:
             return Response({'error': "Insufficient balance"}, status=status.HTTP_400_BAD_REQUEST)
-
