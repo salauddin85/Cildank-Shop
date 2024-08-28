@@ -1,6 +1,6 @@
 # serializers.py
 from rest_framework import serializers
-from .models import PurchaseModel,PurchaseCartModel
+from .models import PurchaseModel
 
 from cloth_product.serializers import ProductSerializer
 class PurchaseSerializer(serializers.ModelSerializer):

@@ -7,7 +7,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
-from .models import PurchaseModel,PurchaseCartModel
+from .models import PurchaseModel
+
 from Purchase.serialaizers  import PurchaseSerializer,PurchaseProductSerialaizer
 from cloth_product.models import Product
 from auth_app.models import Account
