@@ -130,7 +130,8 @@ from decimal import InvalidOperation
 class PurchaseCartView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def post(self, request, price):
+    def post(self, request):
+        # print(price)
         try:
             requested_user = Account.objects.get(user=request.user)
         except Account.DoesNotExist:
@@ -140,11 +141,14 @@ class PurchaseCartView(APIView):
             return Response({'error': "User is not authenticated"}, status=status.HTTP_403_FORBIDDEN)
 
         try:
-            price = Decimal(price)
+            total_price =request.data.get("total_amount")
+            price = Decimal(total_price)
+            print(price)
         except InvalidOperation:
             return Response({'error': "Invalid price format"}, status=status.HTTP_400_BAD_REQUEST)
 
         product_ids = request.data.get('product_ids', [])
+        print(product_ids)
         if not product_ids:
             return Response({'error': "No products specified"}, status=status.HTTP_400_BAD_REQUEST)
 
