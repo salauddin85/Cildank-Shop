@@ -20,7 +20,7 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         # fields = '__all__'
 
-        fields = ['id','name','sub_category','image','price','quantity','description','size']
+        fields = ['id','name','sub_category','image','price','quantity','description','size','color']
 
 
 
