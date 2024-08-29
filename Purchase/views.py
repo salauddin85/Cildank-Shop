@@ -147,33 +147,39 @@ class PurchaseCartView(APIView):
         except InvalidOperation:
             return Response({'error': "Invalid price format"}, status=status.HTTP_400_BAD_REQUEST)
 
-        product_ids = request.data.get('product_ids', [])
-        print(product_ids)
-        if not product_ids:
+        # product_ids = request.data.get('product_ids', [])
+        product_ids = request.data.get('product_ids', None)
+        if product_ids is not None and isinstance(product_ids, list):
+            print(product_ids)
+        else:
+            print("could not found product ")
             return Response({'error': "No products specified"}, status=status.HTTP_400_BAD_REQUEST)
 
-        products = Product.objects.filter(id__in=product_ids)
-        if not products:
-            return Response({'error': "Products not found"}, status=status.HTTP_400_BAD_REQUEST)
+
 
         if requested_user.balance >= price:
             requested_user.balance -= price
             requested_user.save()
-
+            
+           
             email_subject = "Purchase Confirmation"
             email_body = render_to_string("cartpurchase_email.html", {
                 'user': request.user,
-                'balance': requested_user.balance
+                'balance': requested_user.balance,
+               
             })
             email = EmailMultiAlternatives(email_subject, '', to=[request.user.email])
             email.attach_alternative(email_body, 'text/html')
             email.send()
-
-            purchase = PurchaseModel.objects.create(
-                user=request.user,
-            )
-            purchase.product.set(products)
-            purchase.save()
+            for id in product_ids:
+                current_product= Product.objects.get(id=id)
+            
+                purchase = PurchaseModel.objects.create(
+                    user=request.user,
+                    product = current_product
+                )
+                purchase.save()
+               
 
             return Response({'success': "Purchase completed successfully"}, status=status.HTTP_200_OK)
         else:
