@@ -72,16 +72,21 @@ class UserLoginApiView(APIView):
                 return Response({'error': "invalid Credential"}, status=400)
         return Response(serializer.errors, status=400)
 
+
+
 class UserLogoutView(APIView):
     def post(self, request):
-        user = request.user
-        token= Token.objects.get(user=user)
-        print(token)
-        token.delete()
-        logout(request)
-        return redirect("http://127.0.0.1:5500/login.html")
-        # return redirect("login")
-        
+        try:
+            user = request.user
+            print(user)
+            token = Token.objects.get(user=user)
+            print(token)
+            token.delete()
+            logout(request)
+            return Response({"message": "Logged out successfully."}, status=status.HTTP_200_OK)
+        except Token.DoesNotExist:
+            return Response({"error": "Invalid token."}, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 # class UserLogoutView(APIView):
