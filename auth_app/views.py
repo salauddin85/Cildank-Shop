@@ -27,7 +27,7 @@ class UserRegistrationApiView(APIView):
             print(user)
             
             Wishlist.objects.create(user=user)
-
+            
             token = default_token_generator.make_token(user)
             print("token", token)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
