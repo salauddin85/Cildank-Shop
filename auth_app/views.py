@@ -52,7 +52,7 @@ def activate(request, token, uid64):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        return redirect("http://127.0.0.1:5501/login.html")
+        return redirect('http://127.0.0.1:5501/login.html')
         # return redirect("login")
 
 class UserLoginApiView(APIView):
