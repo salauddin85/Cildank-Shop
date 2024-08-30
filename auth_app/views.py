@@ -43,9 +43,11 @@ class UserRegistrationApiView(APIView):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 def activate(request, token, uid64):
+    print(token)
     try:
         uid = urlsafe_base64_decode(uid64).decode()
         user = User._default_manager.get(pk=uid)
+        print(user)
     except(User.DoesNotExist):
         user = None
 
