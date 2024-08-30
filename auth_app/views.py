@@ -32,7 +32,7 @@ class UserRegistrationApiView(APIView):
             print("token", token)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
             print('Uid', uid)
-            confirm_link = f"https://cildank-shop.onrender.com/auth/active/{uid}/{token}"
+            confirm_link = f"https://cildank-shop.onrender.com/auth/active/{uid}/{token}/"
             email_subject = "Confirm Your Email"
             email_body = render_to_string("confirm_email.html", {"confirm_link": confirm_link})
             email = EmailMultiAlternatives(email_subject, '', to=[user.email])
@@ -46,12 +46,14 @@ def activate(request, token, uid64):
     print(token)
     try:
         uid = urlsafe_base64_decode(uid64).decode()
+        print(uid)
         user = User._default_manager.get(pk=uid)
         print(user)
     except(User.DoesNotExist):
         user = None
-
+    print(user)
     if user is not None and default_token_generator.check_token(user, token):
+        
         user.is_active = True
         user.save()
         return redirect('http://127.0.0.1:5501/login.html')
