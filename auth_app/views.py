@@ -52,7 +52,7 @@ def activate(request, token, uid64):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        return redirect("http://127.0.0.1:5500/login.html")
+        return redirect("http://127.0.0.1:5501/login.html")
         # return redirect("login")
 
 class UserLoginApiView(APIView):
@@ -83,7 +83,7 @@ class UserLogoutView(APIView):
             print(token)
             token.delete()
             logout(request)
-            return Response({"message": "Logged out successfully."}, status=status.HTTP_200_OK)
+            return redirect('http://127.0.0.1:5501/login.html') 
         except Token.DoesNotExist:
             return Response({"error": "Invalid token."}, status=status.HTTP_400_BAD_REQUEST)
 
