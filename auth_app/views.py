@@ -87,7 +87,7 @@ class UserLogoutView(APIView):
             print(token)
             token.delete()
             logout(request)
-            return redirect('https://salauddin85.github.io/Cildank_Shop/login.html') 
+            return Response({"ok":True}) 
         except Token.DoesNotExist:
             return Response({"error": "Invalid token."}, status=status.HTTP_400_BAD_REQUEST)
 
