@@ -1,7 +1,7 @@
 
 # Cildank-Shop
 
-Cildank-Shop is a backend project for an online clothing shop built using Django 5.1 and Django Rest Framework. This application provides a platform for users and admins to manage and interact with products seamlessly.
+Cildank-Shop  an online clothing shop built using Django 5.1 and Django Rest Framework. This application provides a platform for users and admins to manage and interact with products seamlessly.
 
 ## Features
 
@@ -30,27 +30,54 @@ Cildank-Shop is a backend project for an online clothing shop built using Django
 
 ### Installation
 
-1. Clone the repository:
+
+### Setting Up the Django Environment on Windows
+
+1. Create a virtual environment:
    ```bash
-   git clone https://github.com/salauddin85/Cildank-Shop.git
+   python -m venv myenv
    ```
-2. Install the required packages:
+
+2. Navigate to the virtual environment directory:
    ```bash
-   pip install -r requirements.txt
+   cd myenv
    ```
-4. Apply migrations:
+
+3. Activate the virtual environment:
+   ```bash
+   Scripts\Activate
+   ```
+
+4. To deactivate the virtual environment, use:
+   ```bash
+   deactivate
+   ```
+
+5. Install Django:
+   ```bash
+   pip install django
+   ```
+
+6. Create migrations:
    ```bash
    python manage.py makemigrations
    ```
-4. Apply migrations:
+
+7. Apply migrations:
    ```bash
    python manage.py migrate
    ```
 
-5. Start the development server:
+8. Create a superuser:
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+9. Start the development server:
    ```bash
    python manage.py runserver
    ```
+
 
 ## Usage
 
