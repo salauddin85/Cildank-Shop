@@ -45,7 +45,7 @@ Cildank-Shop  an online clothing shop built using Django 5.1 and Django Rest Fra
 
 3. Activate the virtual environment:
    ```bash
-   Scripts\Activate
+   Scripts\Activate\myenv
    ```
 
 4. To deactivate the virtual environment, use:
