@@ -32,7 +32,7 @@ Cildank-Shop is a backend project for an online clothing shop built using Django
 
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/yourusername/cildank-shop.git](https://github.com/salauddin85/Cildank-Shop.git)
+   git clone [](https://github.com/salauddin85/Cildank-Shop.git)
    ```
 2. Install the required packages:
    ```bash
